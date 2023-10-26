@@ -1,16 +1,16 @@
 package main
 
 func findKthLargest(array []int, neededNum int) int {
-	NewArray := mergeSort(array)
-	return NewArray[neededNum-1]
+	return mergeSort(array)[neededNum-1]
 }
 
 func merge(leftPart []int, rightPart []int) []int {
 	var mergedArray []int
 	l := 0
 	r := 0
-	for l < len(leftPart) && r < len(rightPart) {
-
+	lenL := len(leftPart)
+	lenR := len(rightPart)
+	for l < lenL && r < lenR {
 		if leftPart[l] > rightPart[r] {
 			mergedArray = append(mergedArray, leftPart[l])
 			l++
