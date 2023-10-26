@@ -6,21 +6,17 @@ func findKthLargest(array []int, neededNum int) int {
 
 func merge(leftPart []int, rightPart []int) []int {
 	var mergedArray []int
-	l := 0
-	r := 0
-	lenL := len(leftPart)
-	lenR := len(rightPart)
-	for l < lenL && r < lenR {
-		if leftPart[l] > rightPart[r] {
-			mergedArray = append(mergedArray, leftPart[l])
-			l++
+	for len(leftPart) > 0 && len(rightPart) > 0 {
+		if leftPart[0] > rightPart[0] {
+			mergedArray = append(mergedArray, leftPart[0])
+			leftPart = leftPart[1:]
 		} else {
-			mergedArray = append(mergedArray, rightPart[r])
-			r++
+			mergedArray = append(mergedArray, rightPart[0])
+			rightPart = rightPart[1:]
 		}
 	}
-	mergedArray = append(mergedArray, leftPart[l:]...)
-	mergedArray = append(mergedArray, rightPart[r:]...)
+	mergedArray = append(mergedArray, leftPart...)
+	mergedArray = append(mergedArray, rightPart...)
 	return mergedArray
 }
 
