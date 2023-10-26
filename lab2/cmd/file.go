@@ -1,3 +1,5 @@
+package main
+
 func findKthLargest(nums []int, k int) int {
 	if len(nums) < k || k <= 0 {
 		return -1
