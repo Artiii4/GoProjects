@@ -1,10 +1,10 @@
 package main
 
-func findKthLargest(array []int, k int) int {
+func findKthLargest(nums []int, k int) int {
 	left := 0
-	right := len(array) - 1
+	right := len(nums) - 1
 	for {
-		pivotIndex := partition(array, left, right)
+		pivotIndex := partition(nums, left, right)
 		if pivotIndex == k-1 {
 			return nums[pivotIndex]
 		} else if pivotIndex > k-1 {
