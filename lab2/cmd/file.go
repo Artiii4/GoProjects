@@ -14,7 +14,7 @@ func findKthLargest(array []int, getIt int) int {
 					ind = j
 				}
 			}
-			removeByIndex(arrayDuplicate, ind)
+			arrayDuplicate = removeByIndex(arrayDuplicate, ind)
 		}
 	} else {
 		neededNum = len(array) - getIt + 1
@@ -27,7 +27,7 @@ func findKthLargest(array []int, getIt int) int {
 					ind = j
 				}
 			}
-			removeByIndex(arrayDuplicate, ind)
+			arrayDuplicate = removeByIndex(arrayDuplicate, ind)
 
 		}
 	}
