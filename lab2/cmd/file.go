@@ -1,25 +1,37 @@
 package main
 
-func findKthLargest(array []int, neededNum int) int {
-	return QuickSort(array)[neededNum-1]
-}
-
-func QuickSort(array []int) []int {
-	lenArr := len(array)
-	if lenArr < 2 {
-		return array
-	}
-	supEl := array[0]
-	var leftPart []int
-	var rightPart []int
-	for i := 1; i < lenArr; i++ {
-		if supEl < array[i] {
-			leftPart = append(leftPart, array[i])
-		} else {
-			rightPart = append(rightPart, array[i])
+func findKthLargest(array []int, getIt int) int {
+	var neededNum int
+	var arrayDuplicate []int = array
+	var toArr, ind int
+	if getIt < (len(array) / 2) {
+		neededNum = getIt
+		for i := 0; i < neededNum; i++ {
+			toArr = arrayDuplicate[0]
+			for j := 0; j < len(arrayDuplicate); j++ {
+				if toArr < arrayDuplicate[j] {
+					toArr = arrayDuplicate[j]
+					ind = j
+				}
+			}
+			removeByIndex(arrayDuplicate, ind)
+		}
+	} else {
+		neededNum = len(array) - getIt
+		for i := 0; i < neededNum; i++ {
+			toArr = arrayDuplicate[0]
+			for j := 0; j < len(arrayDuplicate); j++ {
+				if toArr > arrayDuplicate[j] {
+					toArr = arrayDuplicate[j]
+					ind = j
+				}
+			}
+			removeByIndex(arrayDuplicate, ind)
 		}
 	}
-	sortedArray := append(QuickSort(leftPart), supEl)
-	sortedArray = append(sortedArray, QuickSort(rightPart)...)
-	return sortedArray
+	return toArr
+}
+
+func removeByIndex(array []int, index int) []int {
+	return append(array[:index], array[index+1:]...)
 }
