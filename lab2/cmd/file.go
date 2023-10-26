@@ -2,7 +2,7 @@ package main
 
 func findKthLargest(array []int, getIt int) int {
 	isConsistently := true
-	for i := 0; i < len(array)-1; i++ {
+	for i := 0; i < len(array)/2; i++ {
 		if array[i+1] > array[i] {
 			isConsistently = false
 		}
@@ -10,39 +10,32 @@ func findKthLargest(array []int, getIt int) int {
 	if isConsistently == true {
 		return array[getIt-1]
 	}
-	var neededNum int
-	var arrayDuplicate []int = array
-	var toArr, ind int
+	var toArr, ind, neededNum int
 	if getIt < (len(array) / 2) {
 		neededNum = getIt
 		for i := 0; i < neededNum; i++ {
-			toArr = arrayDuplicate[0]
-			for j := 0; j < len(arrayDuplicate); j++ {
-				if toArr < arrayDuplicate[j] {
-					toArr = arrayDuplicate[j]
+			toArr = array[0]
+			for j := 1; j < len(array); j++ {
+				if toArr < array[j] {
+					toArr = array[j]
 					ind = j
 				}
 			}
-			arrayDuplicate = removeByIndex(arrayDuplicate, ind)
+			array = append(array[:ind], array[ind+1:]...)
 		}
 	} else {
 		neededNum = len(array) - getIt + 1
 		for i := 0; i < neededNum; i++ {
-			toArr = arrayDuplicate[0]
+			toArr = array[0]
 			ind = 0
-			for j := 0; j < len(arrayDuplicate); j++ {
-				if toArr > arrayDuplicate[j] {
-					toArr = arrayDuplicate[j]
+			for j := 0; j < len(array); j++ {
+				if toArr > array[j] {
+					toArr = array[j]
 					ind = j
 				}
 			}
-			arrayDuplicate = removeByIndex(arrayDuplicate, ind)
-
+			array = append(array[:ind], array[ind+1:]...)
 		}
 	}
 	return toArr
-}
-
-func removeByIndex(array []int, index int) []int {
-	return append(array[:index], array[index+1:]...)
 }
