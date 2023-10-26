@@ -1,15 +1,6 @@
 package main
 
 func findKthLargest(array []int, getIt int) int {
-	isConsistently := true
-	for i := 0; i < len(array)/10; i++ {
-		if array[i+1] > array[i] {
-			isConsistently = false
-		}
-	}
-	if isConsistently == true {
-		return array[getIt-1]
-	}
 	var toArr, ind, neededNum int
 	if getIt < (len(array) / 2) {
 		neededNum = getIt
