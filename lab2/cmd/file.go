@@ -1,8 +1,8 @@
 package main
 
-func findKthLargest(array []int, neededNum int) []int {
+func findKthLargest(array []int, neededNum int) int {
 	NewArray := mergeSort(array)
-	return NewArray
+	return NewArray[needNum-1]
 }
 
 func merge(leftPart []int, rightPart []int) []int {
