@@ -2,7 +2,7 @@ package main
 
 func findKthLargest(array []int, getIt int) int {
 	isConsistently := true
-	for i := 0; i < len(array)/2; i++ {
+	for i := 0; i < len(array)/10; i++ {
 		if array[i+1] > array[i] {
 			isConsistently = false
 		}
