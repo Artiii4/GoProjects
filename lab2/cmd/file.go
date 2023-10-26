@@ -1,32 +1,36 @@
-package main
+func findKthLargest(nums []int, k int) int {
+	if len(nums) < k || k <= 0 {
+		return -1
+	}
 
-func findKthLargest(array []int, getIt int) int {
-	var toArr, ind, neededNum int
-	if getIt < (len(array) / 2) {
-		neededNum = getIt
-		for i := 0; i < neededNum; i++ {
-			toArr = array[0]
-			for j := 1; j < len(array); j++ {
-				if toArr < array[j] {
-					toArr = array[j]
-					ind = j
-				}
-			}
-			array = append(array[:ind], array[ind+1:]...)
-		}
-	} else {
-		neededNum = len(array) - getIt + 1
-		for i := 0; i < neededNum; i++ {
-			toArr = array[0]
-			ind = 0
-			for j := 0; j < len(array); j++ {
-				if toArr > array[j] {
-					toArr = array[j]
-					ind = j
-				}
-			}
-			array = append(array[:ind], array[ind+1:]...)
+	left := 0
+	right := len(nums) - 1
+
+	for {
+		pivotIndex := partition(nums, left, right)
+
+		if pivotIndex == k-1 {
+			return nums[pivotIndex]
+		} else if pivotIndex > k-1 {
+			right = pivotIndex - 1
+		} else {
+			left = pivotIndex + 1
 		}
 	}
-	return toArr
+}
+
+func partition(nums []int, left, right int) int {
+	pivot := nums[right]
+	pivotIndex := left
+
+	for i := left; i < right; i++ {
+		if nums[i] > pivot {
+			nums[i], nums[pivotIndex] = nums[pivotIndex], nums[i]
+			pivotIndex++
+		}
+	}
+
+	nums[pivotIndex], nums[right] = nums[right], nums[pivotIndex]
+
+	return pivotIndex
 }
