@@ -1,6 +1,13 @@
-package main
-
 func findKthLargest(array []int, getIt int) int {
+	isConsistently := true
+	for i := 0; i < len(array)-1; i++ {
+		if array[i+1] > array[i] {
+			isConsistently = false
+		}
+	}
+	if isConsistently == true {
+		return array[getIt-1]
+	}
 	var neededNum int
 	var arrayDuplicate []int = array
 	var toArr, ind int
