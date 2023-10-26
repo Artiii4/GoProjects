@@ -1,3 +1,5 @@
+package main
+
 func findKthLargest(array []int, getIt int) int {
 	isConsistently := true
 	for i := 0; i < len(array)-1; i++ {
