@@ -1,5 +1,10 @@
 package main
 
+func findKthLargest(array []int, neededNum int) []int {
+	NewArray := mergeSort(array)
+	return NewArray
+}
+
 func merge(leftPart []int, rightPart []int) []int {
 	var mergedArray []int
 	l := 0
@@ -27,9 +32,4 @@ func mergeSort(array []int) []int {
 	leftPart := mergeSort(array[:middle])
 	rightPart := mergeSort(array[middle:])
 	return merge(leftPart, rightPart)
-}
-
-func findKthLargest(array []int, neededNum int) []int {
-	NewArray := mergeSort(array)
-	return NewArray
 }
