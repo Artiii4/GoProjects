@@ -2,7 +2,7 @@ package main
 
 func findKthLargest(array []int, neededNum int) int {
 	NewArray := mergeSort(array)
-	return NewArray[needNum-1]
+	return NewArray[neededNum-1]
 }
 
 func merge(leftPart []int, rightPart []int) []int {
