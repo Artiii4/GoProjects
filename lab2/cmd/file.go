@@ -5,6 +5,7 @@ func findKthLargest(array []int, getIt int) int {
 	var arrayDuplicate []int = array
 	var toArr, ind int
 	if getIt < (len(array) / 2) {
+		fmt.Println("`")
 		neededNum = getIt
 		for i := 0; i < neededNum; i++ {
 			toArr = arrayDuplicate[0]
@@ -17,18 +18,25 @@ func findKthLargest(array []int, getIt int) int {
 			removeByIndex(arrayDuplicate, ind)
 		}
 	} else {
-		neededNum = len(array) - getIt
+		neededNum = len(array) - getIt + 1
+		fmt.Println(neededNum)
 		for i := 0; i < neededNum; i++ {
 			toArr = arrayDuplicate[0]
+			ind = 0
 			for j := 0; j < len(arrayDuplicate); j++ {
 				if toArr > arrayDuplicate[j] {
 					toArr = arrayDuplicate[j]
 					ind = j
 				}
 			}
+			fmt.Println(arrayDuplicate)
 			removeByIndex(arrayDuplicate, ind)
+			fmt.Println(arrayDuplicate, "`")
+
 		}
 	}
+
+	fmt.Println(toArr)
 	return toArr
 }
 
