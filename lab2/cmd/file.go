@@ -25,10 +25,11 @@ func merge(leftPart []int, rightPart []int) []int {
 }
 
 func mergeSort(array []int) []int {
-	if len(array) < 2 {
+	len := len(array)
+	if len < 2 {
 		return array
 	}
-	middle := len(array) / 2
+	middle := len / 2
 	leftPart := mergeSort(array[:middle])
 	rightPart := mergeSort(array[middle:])
 	return merge(leftPart, rightPart)
