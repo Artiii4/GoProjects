@@ -37,7 +37,3 @@ func findKthLargest(array []int, getIt int) int {
 func removeByIndex(array []int, index int) []int {
 	return append(array[:index], array[index+1:]...)
 }
-
-func removeByIndex(array []int, index int) []int {
-	return append(array[:index], array[index+1:]...)
-}
