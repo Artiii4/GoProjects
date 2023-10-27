@@ -1,13 +1,14 @@
 package main
 
-func findKthLargest(array []int, k int) int {
+func findKthLargest(array []int, getIt int) int {
 	var neededNum int
-	if k < (len(array) / 2) {
-		neededNum = k - 1
+	var length = len(array)
+	if getIt < (length / 2) {
+		neededNum = getIt - 1
 		left := 0
 		right := len(array) - 1
 		for {
-			pivotIndex := partition(array, left, right)
+			pivotIndex := firMove(array, left, right)
 			if pivotIndex == neededNum {
 				return array[pivotIndex]
 			} else if pivotIndex > neededNum {
@@ -17,11 +18,11 @@ func findKthLargest(array []int, k int) int {
 			}
 		}
 	} else {
-		neededNum = len(array) - k
+		neededNum = length - getIt
 		left := 0
-		right := len(array) - 1
+		right := length - 1
 		for {
-			pivotIndex := patition(array, left, right)
+			pivotIndex := secMove(array, left, right)
 			if pivotIndex == neededNum {
 				return array[pivotIndex]
 			} else if pivotIndex > neededNum {
@@ -33,7 +34,7 @@ func findKthLargest(array []int, k int) int {
 	}
 }
 
-func partition(array []int, left int, right int) int {
+func firMove(array []int, left int, right int) int {
 	pivot := array[right]
 	pivotIndex := left
 	for i := left; i < right; i++ {
@@ -46,7 +47,7 @@ func partition(array []int, left int, right int) int {
 	return pivotIndex
 }
 
-func patition(array []int, left int, right int) int {
+func secMove(array []int, left int, right int) int {
 	pivot := array[right]
 	pivotIndex := left
 	for i := left; i < right; i++ {
