@@ -1,12 +1,11 @@
 package main
 
 func findKthLargest(array []int, getIt int) int {
-	var neededNum int
-	var length = len(array)
+	length := len(array)
+	left := 0
+	right := length - 1
 	if getIt < (length / 2) {
-		neededNum = getIt - 1
-		left := 0
-		right := len(array) - 1
+		neededNum := getIt - 1
 		for {
 			pivotIndex := firMove(array, left, right)
 			if pivotIndex == neededNum {
@@ -18,9 +17,7 @@ func findKthLargest(array []int, getIt int) int {
 			}
 		}
 	} else {
-		neededNum = length - getIt
-		left := 0
-		right := length - 1
+		neededNum := length - getIt
 		for {
 			pivotIndex := secMove(array, left, right)
 			if pivotIndex == neededNum {
