@@ -1,13 +1,14 @@
 package main
 
 func findKthLargest(array []int, getIt int) int {
-	length := len(array)
-	left := 0
-	right := length - 1
+	var length = len(array)
+	var left = 0
+	var right = length - 1
+	var pivotIndex int
 	if getIt < (length / 2) {
 		neededNum := getIt - 1
 		for {
-			pivotIndex := firMove(array, left, right)
+			pivotIndex = firMove(array, left, right)
 			if pivotIndex == neededNum {
 				return array[pivotIndex]
 			} else if pivotIndex > neededNum {
@@ -19,7 +20,7 @@ func findKthLargest(array []int, getIt int) int {
 	} else {
 		neededNum := length - getIt
 		for {
-			pivotIndex := secMove(array, left, right)
+			pivotIndex = secMove(array, left, right)
 			if pivotIndex == neededNum {
 				return array[pivotIndex]
 			} else if pivotIndex > neededNum {
@@ -32,8 +33,8 @@ func findKthLargest(array []int, getIt int) int {
 }
 
 func firMove(array []int, left int, right int) int {
-	pivot := array[right]
-	pivotIndex := left
+	var pivot = array[right]
+	var pivotIndex = left
 	for i := left; i < right; i++ {
 		if array[i] > pivot {
 			array[i], array[pivotIndex] = array[pivotIndex], array[i]
@@ -45,8 +46,8 @@ func firMove(array []int, left int, right int) int {
 }
 
 func secMove(array []int, left int, right int) int {
-	pivot := array[right]
-	pivotIndex := left
+	var pivot = array[right]
+	var pivotIndex = left
 	for i := left; i < right; i++ {
 		if array[i] < pivot {
 			array[i], array[pivotIndex] = array[pivotIndex], array[i]
