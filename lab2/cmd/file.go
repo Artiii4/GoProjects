@@ -1,29 +1,60 @@
 package main
 
-func findKthLargest(nums []int, k int) int {
-	left := 0
-	right := len(nums) - 1
-	for {
-		pivotIndex := partition(nums, left, right)
-		if pivotIndex == k-1 {
-			return nums[pivotIndex]
-		} else if pivotIndex > k-1 {
-			right = pivotIndex - 1
-		} else {
-			left = pivotIndex + 1
+func findKthLargest(array []int, k int) int {
+	var neededNum int
+	if k < (len(array) / 2) {
+		neededNum = k - 1
+		left := 0
+		right := len(array) - 1
+		for {
+			pivotIndex := partition(array, left, right)
+			if pivotIndex == neededNum {
+				return array[pivotIndex]
+			} else if pivotIndex > neededNum {
+				right = pivotIndex - 1
+			} else {
+				left = pivotIndex + 1
+			}
+		}
+	} else {
+		neededNum = len(array) - k
+		left := 0
+		right := len(array) - 1
+		for {
+			pivotIndex := patition(array, left, right)
+			if pivotIndex == neededNum {
+				return array[pivotIndex]
+			} else if pivotIndex > neededNum {
+				right = pivotIndex - 1
+			} else {
+				left = pivotIndex + 1
+			}
 		}
 	}
 }
 
-func partition(nums []int, left, right int) int {
-	pivot := nums[right]
+func partition(array []int, left int, right int) int {
+	pivot := array[right]
 	pivotIndex := left
 	for i := left; i < right; i++ {
-		if nums[i] > pivot {
-			nums[i], nums[pivotIndex] = nums[pivotIndex], nums[i]
+		if array[i] > pivot {
+			array[i], array[pivotIndex] = array[pivotIndex], array[i]
 			pivotIndex++
 		}
 	}
-	nums[pivotIndex], nums[right] = nums[right], nums[pivotIndex]
+	array[pivotIndex], array[right] = array[right], array[pivotIndex]
+	return pivotIndex
+}
+
+func patition(array []int, left int, right int) int {
+	pivot := array[right]
+	pivotIndex := left
+	for i := left; i < right; i++ {
+		if array[i] < pivot {
+			array[i], array[pivotIndex] = array[pivotIndex], array[i]
+			pivotIndex++
+		}
+	}
+	array[pivotIndex], array[right] = array[right], array[pivotIndex]
 	return pivotIndex
 }
