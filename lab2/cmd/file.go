@@ -1,16 +1,16 @@
 package main
 
-func findKthLargest(array []int, getIt int) int {
-	var length = len(array)
-	var left = 0
-	var right = length - 1
-	var pivotIndex int
+func findKthLargest(slice []int, getIt int) int {
+	length := len(slice)
+	left := 0
+	right := length - 1
 	if getIt < (length / 2) {
 		neededNum := getIt - 1
+		var pivotIndex int
 		for {
-			pivotIndex = firMove(array, left, right)
+			pivotIndex = firMove(slice, left, right)
 			if pivotIndex == neededNum {
-				return array[pivotIndex]
+				return slice[pivotIndex]
 			} else if pivotIndex > neededNum {
 				right = pivotIndex - 1
 			} else {
@@ -20,9 +20,9 @@ func findKthLargest(array []int, getIt int) int {
 	} else {
 		neededNum := length - getIt
 		for {
-			pivotIndex = secMove(array, left, right)
+			pivotIndex := secMove(slice, left, right)
 			if pivotIndex == neededNum {
-				return array[pivotIndex]
+				return slice[pivotIndex]
 			} else if pivotIndex > neededNum {
 				right = pivotIndex - 1
 			} else {
@@ -32,28 +32,28 @@ func findKthLargest(array []int, getIt int) int {
 	}
 }
 
-func firMove(array []int, left int, right int) int {
-	var pivot = array[right]
-	var pivotIndex = left
+func firMove(slice []int, left int, right int) int {
+	pivot := slice[right]
+	pivotIndex := left
 	for i := left; i < right; i++ {
-		if array[i] > pivot {
-			array[i], array[pivotIndex] = array[pivotIndex], array[i]
+		if slice[i] > pivot {
+			slice[i], slice[pivotIndex] = slice[pivotIndex], slice[i]
 			pivotIndex++
 		}
 	}
-	array[pivotIndex], array[right] = array[right], array[pivotIndex]
+	slice[pivotIndex], slice[right] = slice[right], slice[pivotIndex]
 	return pivotIndex
 }
 
-func secMove(array []int, left int, right int) int {
-	var pivot = array[right]
-	var pivotIndex = left
+func secMove(slice []int, left int, right int) int {
+	pivot := slice[right]
+	pivotIndex := left
 	for i := left; i < right; i++ {
-		if array[i] < pivot {
-			array[i], array[pivotIndex] = array[pivotIndex], array[i]
+		if slice[i] < pivot {
+			slice[i], slice[pivotIndex] = slice[pivotIndex], slice[i]
 			pivotIndex++
 		}
 	}
-	array[pivotIndex], array[right] = array[right], array[pivotIndex]
+	slice[pivotIndex], slice[right] = slice[right], slice[pivotIndex]
 	return pivotIndex
 }
