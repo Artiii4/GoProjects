@@ -48,7 +48,7 @@ func firMove(slice []int, left int, right int, check bool) int {
 			}
 		}
 	} else {
-		for i := left; i > right; i++ {
+		for i := left; i < right; i++ {
 			if slice[i] < pivot {
 				slice[i], slice[pivotIndex] = slice[pivotIndex], slice[i]
 				pivotIndex++
