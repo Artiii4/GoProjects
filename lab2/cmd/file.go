@@ -1,35 +1,67 @@
 package main
 
-func merge(leftPart []int, rightPart []int) []int {
-	var mergedArray []int
-	l := 0
-	r := 0
-	for l < len(leftPart) && r < len(rightPart) {
-		if leftPart[l] > rightPart[r] {
-			mergedArray = append(mergedArray, leftPart[l])
-			l++
+import "fmt"
+
+func main() {
+	var array []int
+	k := 2
+	kthLargest := findKthLargest(array, k)
+	fmt.Println(kthLargest)
+}
+
+func findKthLargest(slice []int, getIt int) int {
+	if len(slice) == 0 {
+		fmt.Println("Error, give another slice")
+		return -1
+	}
+	if getIt > len(slice) {
+		fmt.Println("Error, give another number or slice")
+		return -1
+	}
+
+	length := len(slice)
+	left := 0
+	right := length - 1
+	var pivotIndex int
+	var check bool
+	var neededNum int
+	if getIt < (length / 2) {
+		neededNum = getIt - 1
+		check = true
+	} else {
+		neededNum = length - getIt
+		check = false
+	}
+	for {
+		pivotIndex = firMove(slice, left, right, check)
+		if pivotIndex == neededNum {
+			return slice[pivotIndex]
+		} else if pivotIndex > neededNum {
+			right = pivotIndex - 1
 		} else {
-			mergedArray = append(mergedArray, rightPart[r])
-			r++
+			left = pivotIndex + 1
 		}
 	}
-	mergedArray = append(mergedArray, leftPart[l:]...)
-	mergedArray = append(mergedArray, rightPart[r:]...)
-	return mergedArray
 }
 
-func mergeSort(array []int) []int {
-	len := len(array)
-	if len < 2 {
-		return array
+func firMove(slice []int, left int, right int, check bool) int {
+	pivot := slice[right]
+	pivotIndex := left
+	if check == true {
+		for i := left; i < right; i++ {
+			if slice[i] > pivot {
+				slice[i], slice[pivotIndex] = slice[pivotIndex], slice[i]
+				pivotIndex++
+			}
+		}
+	} else {
+		for i := left; i > right; i++ {
+			if slice[i] < pivot {
+				slice[i], slice[pivotIndex] = slice[pivotIndex], slice[i]
+				pivotIndex++
+			}
+		}
 	}
-	middle := len / 2
-	leftPart := mergeSort(array[:middle])
-	rightPart := mergeSort(array[middle:])
-	return merge(leftPart, rightPart)
-}
-
-func findKthLargest(array []int, neededNum int) []int {
-	NewArray := mergeSort(array)
-	return NewArray
+	slice[pivotIndex], slice[right] = slice[right], slice[pivotIndex]
+	return pivotIndex
 }
