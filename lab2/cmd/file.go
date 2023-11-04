@@ -2,13 +2,6 @@ package main
 
 import "fmt"
 
-func main() {
-	var array []int
-	k := 2
-	kthLargest := findKthLargest(array, k)
-	fmt.Println(kthLargest)
-}
-
 func findKthLargest(slice []int, getIt int) int {
 	if len(slice) == 0 {
 		fmt.Println("Error, give another slice")
